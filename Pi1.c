@@ -7,15 +7,17 @@ double step;
 
 int main(int argc, char* argv[])
 {
-	clock_t start, stop;
+	clock_t spstart, spstop;
+	double sswtime, sewtime;
+	//volatile
 	double x, pi, sum = 0.0;
 	int i;
-	//osobny start
-	double start_t = 0.0, end_t;
-	start_t = omp_get_wtime();
+	//SEKWENCYJNIE
+	sswtime = omp_get_wtime();
+	spstart = clock();
 
 	step = 1. / (double)num_steps;
-	start = clock();
+
 	for (i = 0; i < num_steps; i++)
 	{
 		x = (i + .5) * step;
@@ -23,11 +25,12 @@ int main(int argc, char* argv[])
 	}
 
 	pi = sum * step;
-	stop = clock();
-	end_t = omp_get_wtime();
-
-	printf("Wartosc liczby PI wynosi %15.12f\n", pi);
-	printf("Czas przetwarzania procesorow wynosi %f sekund, wallclock %f sek \n", ((double)(stop - start) / CLOCKS_PER_SEC), end_t - start_t);
+	spstop = clock();
+	sewtime = omp_get_wtime();
+	
+	printf("%15.12f artosc liczby PI sekwencyjnie \n", pi);
+	printf("Czas procesorów przetwarzania sekwencyjnego  %f sekund \n", ((double)(spstop - spstart) / CLOCKS_PER_SEC));
+	printf("Czas trwania obliczen sekwencyjnych - wallclock %f sekund \n", sewtime - sswtime);
 
 	return 0;
 }

@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 
 #pragma omp parallel
     {
-        double local_sum = 0.0; // prywatna suma dla każdego wątku
+        double local_sum = 0.0; 
         #pragma omp for
         for (i = 0; i < num_steps; i++)
         {
@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
         }
 
         #pragma omp atomic
-        sum += local_sum; // scalanie wyników pracy każdego wątku
+        sum += local_sum;
     }
 
     pi = sum * step;

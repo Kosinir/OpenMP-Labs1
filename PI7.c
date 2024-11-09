@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
         stop = clock();
         endwtime = omp_get_wtime();
 
-        printf("%d. %f %f %15.12f\n",
+        printf("%d. %f %f %15.12f\n", //index, czas, wallclock, pi
                offset, ((double)(stop - start) / CLOCKS_PER_SEC), endwtime - startwtime, pi);
     }
 
